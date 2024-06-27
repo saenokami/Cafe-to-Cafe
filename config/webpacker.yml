@@ -10,13 +10,15 @@ default: &default
 
   # Additional paths webpack should lookup modules
   # ['app/assets', 'engine/foo/app/assets']
-  additional_paths: []
+  additional_paths:
+  - node_modules/bootstrap/scss
+
 
   # Reload manifest.json on all requests so we reload latest compiled packs
-  cache_manifest: false
+  cache_manifest: true
 
   # Extract and emit a css file
-  extract_css: false
+  extract_css: true
 
   static_assets_extensions:
     - .jpg
@@ -50,6 +52,10 @@ default: &default
 development:
   <<: *default
   compile: true
+  entry:
+    application:
+      - 'app/javascript/application.js'
+      - 'app/javascript/application.css'
 
   # Reference: https://webpack.js.org/configuration/dev-server/
   dev_server:
@@ -70,6 +76,7 @@ development:
       'Access-Control-Allow-Origin': '*'
     watch_options:
       ignored: '**/node_modules/**'
+
 
 
 test:
